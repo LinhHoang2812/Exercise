@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio</title>
+</head>
+<body>
+    <label for="imagelink">Insert your image link here</label><br>
+    <input type="text" name="imagelink" id="idimagelink" onchange="inputcheck()"><br><br>
+    <input type="button" id="btn-insert" value="inserisci in lista" disabled onclick="insertimage() ">
+    
+    <br>
+    <div id="links">
+
+    </div>
+    <br>
+    <br>
+    <input type="button" id="btn-see" value="visualizza lista immagini" disabled onclick="seeimage()">
+    </br>
+    <div id="images">
+
+    </div>
+    
+
+    <script>
+        var image_link_list = []; 
+
+        function insertimage() {
+            var image_inserted = document.getElementById("idimagelink"); 
+            var image_list = "<ul>";
+            // image_link = "<a href= "+ image_link_list[image_link_list.length-1] +" >"+(image_link_list.length)+ "." +" " + image_link_list[image_link_list.length-1] + "</a>" + "</br>"
+
+            if (!image_link_list.includes(image_inserted.value)) {
+                image_link_list.push(image_inserted.value);
+               
+            }
+            
+            for ( var i=0;i<image_link_list.length; i++) {
+                    image_list += "<li>" + "<a href= "+ image_link_list[i] +" >"+ image_link_list[i] + "</a>" + "</li>"
+
+
+                }
+            image_list += "</ul>";
+            document.getElementById("links").innerHTML =image_list;
+            
+            image_inserted.value = "";
+            image_inserted.focus()
+            var insert_btn = document.getElementById("btn-insert");
+            insert_btn.disabled = true;
+
+            var see_btn = document.getElementById("btn-see");
+            if (see_btn.disabled == true) {
+                if (image_link_list.length >0){
+                see_btn.disabled = false;
+
+            }
+            
+            }
+
+           
+        }
+
+        function seeimage() {
+
+            var image = "";
+            for (var i =0; i< image_link_list.length; i++) {
+                image += "<img src= "+ image_link_list[i] +" width=200 height=200 >"
+
+            }
+            document.getElementById("images").innerHTML =image;
+           
+
+        }
+
+        function inputcheck() {
+            var image_inserted = document.getElementById("idimagelink");
+            var insert_btn = document.getElementById("btn-insert");
+            if (image_inserted.value != "") {
+                insert_btn.disabled = false;
+            }
+        
+        }
+
+
+
+        
+        
+            
+            
+
+        
+    </script>
+</body>
+</html>
